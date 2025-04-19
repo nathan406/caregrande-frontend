@@ -2,25 +2,27 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { doctors } from '../data';
 import Rating from '../components/Rating';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const DoctorProfilePage = () => {
   const { id } = useParams();
   const [doctor, setDoctor] = useState(null);
   const [selectedDay, setSelectedDay] = useState(15); // Default to day 15
-  
+
   useEffect(() => {
     const foundDoctor = doctors.find(doc => doc.id === parseInt(id));
     setDoctor(foundDoctor);
   }, [id]);
-  
+
   if (!doctor) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <p>Loading doctor information...</p>
+        <LoadingSpinner />
+        <p className="text-gray-500 mt-4">Loading doctor information...</p>
       </div>
     );
   }
-  
+
   return (
     <div className="container mx-auto px-4 pt-6 pb-20">
       {/* Back button and actions */}
@@ -30,7 +32,7 @@ const DoctorProfilePage = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </Link>
-        
+
         <div className="ml-auto flex items-center gap-4">
           <button className="p-2 rounded-full border border-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,26 +46,26 @@ const DoctorProfilePage = () => {
           </button>
         </div>
       </div>
-      
+
       {/* Doctor profile header */}
       <div className="bg-white rounded-xl p-6 mb-6">
         <div className="flex flex-col items-center">
           <div className="w-24 h-24 rounded-full bg-gray-200 overflow-hidden mb-4">
-            <img 
-              src={doctor.image} 
-              alt={doctor.name} 
+            <img
+              src={doctor.image}
+              alt={doctor.name}
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.src = `https://ui-avatars.com/api/?name=${doctor.name}&background=random&size=96`;
               }}
             />
           </div>
-          
+
           <h1 className="text-xl font-semibold text-center">{doctor.name}</h1>
           <p className="text-sm text-gray-500 mb-2">{doctor.specialty} • {doctor.hospital}</p>
-          
+
           <Rating value={doctor.rating} reviews={doctor.reviews} size="md" />
-          
+
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 mt-6 w-full">
             <div className="flex flex-col items-center">
@@ -75,7 +77,7 @@ const DoctorProfilePage = () => {
               <span className="text-lg font-semibold">{doctor.patients}</span>
               <span className="text-xs text-gray-500">Patients</span>
             </div>
-            
+
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 flex items-center justify-center bg-pink-50 rounded-full mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,7 +87,7 @@ const DoctorProfilePage = () => {
               <span className="text-lg font-semibold">{doctor.experience}</span>
               <span className="text-xs text-gray-500">Experience</span>
             </div>
-            
+
             <div className="flex flex-col items-center">
               <div className="w-12 h-12 flex items-center justify-center bg-yellow-50 rounded-full mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,29 +100,29 @@ const DoctorProfilePage = () => {
           </div>
         </div>
       </div>
-      
+
       {/* About doctor */}
       <div className="bg-white rounded-xl p-6 mb-6">
         <h2 className="text-lg font-semibold mb-3">About Doctor</h2>
         <p className="text-gray-600 text-sm">{doctor.about}</p>
         <button className="text-blue-600 text-sm mt-2">See More</button>
       </div>
-      
+
       {/* Working time */}
       <div className="bg-white rounded-xl p-6 mb-6">
         <h2 className="text-lg font-semibold mb-3">Working time</h2>
         <p className="text-gray-600 text-sm">{doctor.workingTime}</p>
       </div>
-      
+
       {/* Schedule */}
       <div className="bg-white rounded-xl p-6 mb-6">
         <h2 className="text-lg font-semibold mb-3">Schedule</h2>
-        
+
         <div className="grid grid-cols-7 gap-2 mb-6">
           {['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, index) => (
             <div key={index} className="text-center">
               <p className="text-xs text-gray-500 mb-1">{day}</p>
-              <button 
+              <button
                 className={`w-full py-2 rounded-lg text-sm ${selectedDay === index + 12 ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700'}`}
                 onClick={() => setSelectedDay(index + 12)}
               >
@@ -129,7 +131,7 @@ const DoctorProfilePage = () => {
             </div>
           ))}
         </div>
-        
+
         <button className="w-full py-3 bg-blue-500 text-white rounded-lg font-medium">
           Book Appointment
         </button>
