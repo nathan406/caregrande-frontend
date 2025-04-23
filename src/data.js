@@ -108,27 +108,39 @@ export const doctors = [
 export const categories = [
   {
     id: 1,
-    name: "Cardiology",
-    icon: "❤️",
+    name: "General Virtual Consultation",
+    icon: "👨‍⚕️",
     color: "#FFE2E6"
   },
   {
     id: 2,
-    name: "Psychology",
+    name: "Mental Health & Psychiatry",
     icon: "🧠",
     color: "#E2F4FF"
   },
   {
     id: 3,
-    name: "Dental",
-    icon: "🦷",
+    name: "Dermatology",
+    icon: "🧴",
     color: "#E5E9FF"
   },
   {
     id: 4,
-    name: "Covid-19",
-    icon: "🦠",
+    name: "Therapy",
+    icon: "🧘",
     color: "#FFF6E2"
+  },
+  {
+    id: 5,
+    name: "GBV",
+    icon: "🛡️",
+    color: "#F0E6FF"
+  },
+  {
+    id: 6,
+    name: "HIV Services",
+    icon: "🩸",
+    color: "#FFE6E6"
   }
 ];
 

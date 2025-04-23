@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import DoctorListPage from './pages/DoctorListPage'
 import DoctorProfilePage from './pages/DoctorProfilePage'
 import NotFoundPage from './pages/NotFoundPage'
+import EhrPage from './pages/EhrPage'
 
 // Components
 import Navbar from './components/Navbar'
@@ -23,6 +24,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/doctors" element={<DoctorListPage />} />
               <Route path="/doctors/:id" element={<DoctorProfilePage />} />
+              <Route path="/ehr" element={<EhrPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
